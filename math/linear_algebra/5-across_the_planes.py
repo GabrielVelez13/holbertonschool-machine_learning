@@ -5,17 +5,6 @@ The matrix shape function ensure both matrices are [2 x 2]
 """
 
 
-def matrix_shape(matrix: list):
-    """
-    Returns the shape of a matrix.
-    """
-    dimensions = []
-    while isinstance(matrix, list):
-        dimensions.append(len(matrix))
-        matrix = matrix[0] if matrix else []
-    return dimensions
-
-
 def add_matrices2D(mat1, mat2):
     """
     Adding two [2 x 2] matrices
@@ -23,6 +12,16 @@ def add_matrices2D(mat1, mat2):
     it could work with any matrices of the same shape
     as long as they are square
     """
+    def matrix_shape(matrix: list):
+        """
+        Returns the shape of a matrix.
+        """
+        dimensions = []
+        while isinstance(matrix, list):
+            dimensions.append(len(matrix))
+            matrix = matrix[0] if matrix else []
+        return dimensions
+
     if (matrix_shape(mat1) and matrix_shape(mat2)) != [2, 2]:
         return None
 
@@ -33,4 +32,4 @@ def add_matrices2D(mat1, mat2):
         for j in range(len(mat1[0])):
             row.append(mat1[i][j] + mat2[i][j])
         added_matrix.append(row)
-    return added_matrix.copy()
+    return added_matrix
