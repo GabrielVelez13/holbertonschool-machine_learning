@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """ Function to return the shape of a matrix. """
-import numpy as np
 
 
-def matrix_shape(matrix: list) -> list:
+def matrix_shape(matrix: list):
     """
-    Returns the shape of a matrix by
-    turning it into a numpy array
+    Returns the shape of a matrix.
     """
-    return list(np.array(matrix).shape)
+    dimensions = []
+    while isinstance(matrix, list):
+        dimensions.append(len(matrix))
+        matrix = matrix[0] if matrix else []
+    return dimensions
