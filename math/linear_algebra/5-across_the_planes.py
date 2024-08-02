@@ -12,21 +12,10 @@ def add_matrices2D(mat1, mat2):
     it could work with any matrices of the same shape
     as long as they are square
     """
-    def matrix_shape(matrix: list):
-        """
-        Returns the shape of a matrix.
-        """
-        dimensions = []
-        while isinstance(matrix, list):
-            dimensions.append(len(matrix))
-            matrix = matrix[0] if matrix else []
-        return dimensions
-
-    if (matrix_shape(mat1) and matrix_shape(mat2)) != [2, 2]:
+    if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
         return None
 
     added_matrix = []
-
     for i in range(len(mat1)):
         row = []
         for j in range(len(mat1[0])):
