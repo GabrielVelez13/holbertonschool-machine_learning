@@ -4,4 +4,4 @@
 
 def np_transpose(matrix):
     """ Using numpy to transpose a matrix """
-    return np.array(matrix).T.copy()
+    return matrix.T.copy()
