@@ -8,6 +8,6 @@ def poly_derivative(poly):
         return None
 
     if len(poly) == 1 or len(poly) == 0:
-        return [0]
+        return None
 
     return [i * num for i, num in enumerate(poly)][1:]
