@@ -20,9 +20,9 @@ def bars():
 
     # Plotting
     plt.bar(x, y1[0], color=y1[1],
-            label="apple", width=.5)
+            label="apples", width=.5)
     plt.bar(x, y2[0], color=y2[1], bottom=y1[0],
-            label="banana", width=.5)
+            label="bananas", width=.5)
     plt.bar(x, y3[0], color=y3[1], bottom=y1[0] + y2[0],
             label="oranges", width=.5)
     plt.bar(x, y4[0], color=y4[1], bottom=y1[0] + y2[0] + y3[0],
