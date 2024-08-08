@@ -7,7 +7,7 @@ def poly_derivative(poly):
     if not isinstance(poly, list):
         return None
 
-    if len(poly) == 1 or len(poly) == 0:
+    if len(poly) == 1:
         return None
 
     return [i * num for i, num in enumerate(poly)][1:]
