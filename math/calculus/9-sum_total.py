@@ -4,12 +4,9 @@
 
 def summation_i_squared(n):
     """
-    Due to not being able to use loops
-    recursion was used instead
+    As this is just a sum of squares we use the formula
     """
     if n < 1:
         return None
-    if n == 1:
-        return 1
 
-    return n**2 + summation_i_squared(n - 1)
+    return n * (n + 1) * (2 * n + 1) // 6
