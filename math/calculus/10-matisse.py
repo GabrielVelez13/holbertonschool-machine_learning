@@ -11,6 +11,3 @@ def poly_derivative(poly):
         return [0]
 
     return [i * num for i, num in enumerate(poly)][1:]
-
-
-print(isinstance([], list))
