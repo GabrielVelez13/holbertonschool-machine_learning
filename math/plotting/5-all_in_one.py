@@ -66,7 +66,8 @@ def all_in_one():
 
     # Fourth plot (two lines)
     # Labels
-    ax4.set_title("Exponential Decay of Radioactive Elements", fontsize="x-small")
+    ax4.set_title("Exponential Decay of Radioactive Elements",
+                  fontsize="x-small")
     ax4.set_xlabel("Time (years)", fontsize="x-small")
     ax4.set_ylabel("Fraction Remaining", fontsize="x-small")
 
