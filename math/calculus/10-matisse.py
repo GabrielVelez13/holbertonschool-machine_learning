@@ -4,7 +4,7 @@
 
 def poly_derivative(poly):
     """ List comprehension and slicing to return the derivative """
-    if len(poly) == 0:
+    if poly is list:
         return None
 
     if len(poly) == 1:
