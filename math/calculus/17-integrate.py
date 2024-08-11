@@ -14,6 +14,9 @@ def poly_integral(poly, C=0):
     if len(poly) == 0:
         return [0]
 
+    if poly == [0]:
+        return [C]
+
     integral = []
     for i, num in enumerate(poly):
         coe = num / (i + 1)
@@ -24,3 +27,4 @@ def poly_integral(poly, C=0):
 
     integral.insert(0, C)
     return integral
+
