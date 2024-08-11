@@ -8,6 +8,19 @@ def poly_integral(poly, C=0):
     the opposite of a derivatice, then adding C to the
     0th index
     """
-    integral = [float(num / (i + 1)) for i, num in enumerate(poly)]
+    if not isinstance(poly, list) or len(poly) == 0:
+        return None
+
+    if len(poly) == 1:
+        return [0]
+
+    integral = []
+    for i, num in enumerate(poly):
+        coe = num / (i + 1)
+        if coe % 1 == 0:
+            integral.append(int(coe))
+        else:
+            integral.append(coe)
+
     integral.insert(0, C)
     return integral
