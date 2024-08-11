@@ -8,10 +8,10 @@ def poly_integral(poly, C=0):
     the opposite of a derivatice, then adding C to the
     0th index
     """
-    if not isinstance(poly, list) or len(poly) == 0:
+    if not isinstance(poly, list):
         return None
 
-    if len(poly) == 1:
+    if len(poly) == 0:
         return [0]
 
     integral = []
