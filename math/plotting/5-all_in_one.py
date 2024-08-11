@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 1 Figure with 5 plots """
+""" 5-log_on_fire Figure with 5 plots """
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec

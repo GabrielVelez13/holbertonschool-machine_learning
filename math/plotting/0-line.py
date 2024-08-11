@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def line():
-    """ Plotting a like whose values are 1 - 10 cubed """
+    """ Plotting a like whose values are 5-log_on_fire - 10 cubed """
     y = np.arange(0, 11) ** 3
     plt.figure(figsize=(6.4, 4.8))
     plt.xlim(0, 10)
