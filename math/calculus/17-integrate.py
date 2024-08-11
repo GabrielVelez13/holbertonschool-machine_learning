@@ -8,11 +8,11 @@ def poly_integral(poly, C=0):
     the opposite of a derivatice, then adding C to the
     0th index
     """
-    if not isinstance(poly, list):
+    if not isinstance(poly, list) or C == None:
         return None
 
     if len(poly) == 0:
-        return [0]
+        return None
 
     if poly == [0]:
         return [C]
@@ -27,4 +27,3 @@ def poly_integral(poly, C=0):
 
     integral.insert(0, C)
     return integral
-
