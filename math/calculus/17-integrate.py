@@ -8,7 +8,7 @@ def poly_integral(poly, C=0):
     the opposite of a derivatice, then adding C to the
     0th index
     """
-    if not isinstance(poly, list) or C == None:
+    if not isinstance(poly, list) or C is None:
         return None
 
     if len(poly) == 0:
