@@ -33,8 +33,7 @@ class Node:
                 )
             if node.right_child:
                 stack.append(
-                    (node.right_child, node.right_child.depth)
-                )
+                    (node.right_child, node.right_child.depth))
 
         return max_depth
 
@@ -98,6 +97,25 @@ class Node:
             return root
         return node
 
+    def get_leaves_below(self):
+        """ Generator to yield leaves below this node """
+        stack = [(self, self.is_leaf)]
+
+        while stack:
+            element, is_leaf = stack.pop(0)
+
+            if is_leaf:
+                yield "->" + str(element)
+
+            if element.left_child:
+                stack.append(
+                    (element.left_child, element.left_child.is_leaf)
+                )
+            if element.right_child:
+                stack.append(
+                    (element.right_child, element.right_child.is_leaf)
+                )
+
 
 class Leaf(Node):
     """ Leaf class representing a decision outcome in the tree """
@@ -119,6 +137,10 @@ class Leaf(Node):
     def __str__(self):
         """ String representation of the leaf """
         return f" leaf [value={self.value}]"
+
+    def get_leaves_below(self):
+        """ Return the leaf itself as it has no children """
+        return [self]
 
 
 class Decision_Tree:
@@ -150,3 +172,7 @@ class Decision_Tree:
     def __str__(self):
         """ String representation of the decision tree """
         return self.root.__str__()
+
+    def get_leaves(self):
+        """ Get all leaves in the tree """
+        return self.root.get_leaves_below()
