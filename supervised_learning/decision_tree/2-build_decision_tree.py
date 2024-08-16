@@ -88,8 +88,8 @@ class Node:
             if self.right_child else ""
 
         if self.is_root:
-            return (f"root [feature={self.feature}, threshold="
-                    f"{self.threshold}]\n{left}{right}")
+            return (f"root [feature={self.feature}, threshold={
+                    self.threshold}]\n{left}{right}")
         return (f" node [feature={self.feature}, threshold={
                 self.threshold}]\n{left}{right}").rstrip()
 
