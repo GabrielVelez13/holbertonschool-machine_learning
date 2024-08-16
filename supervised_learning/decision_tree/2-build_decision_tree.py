@@ -87,11 +87,13 @@ class Node:
         right = self.right_child_add_prefix(str(self.right_child)) \
             if self.right_child else ""
 
+        root = (f"root [feature={self.feature}, "
+                f"threshold={self.threshold}]\n{left}{right}")
+        node = (f" node [feature={self.feature}, "
+                f"threshold={self.threshold}]\n{left}{right}").rstrip()
         if self.is_root:
-            return (f"root [feature={self.feature}, threshold={
-                    self.threshold}]\n{left}{right}")
-        return (f" node [feature={self.feature}, threshold={
-                self.threshold}]\n{left}{right}").rstrip()
+            return root
+        return node
 
 
 class Leaf(Node):
