@@ -45,7 +45,7 @@ class Node:
         leaf = 0
 
         while stack:
-            node, is_leaf = stack.pop()
+            element, is_leaf = stack.pop()
 
             if is_leaf:
                 leaf += 1
@@ -53,13 +53,13 @@ class Node:
             else:
                 node += 1
 
-            if node.left_child:
+            if element.left_child:
                 stack.append(
-                    (node.left_child, node.left_child.is_leaf)
+                    (element.left_child, element.left_child.is_leaf)
                 )
-            if node.right_child:
+            if element.right_child:
                 stack.append(
-                    (node.right_child, node.right_child.is_leaf)
+                    (element.right_child, element.right_child.is_leaf)
                 )
 
         return leaf if only_leaves else node
