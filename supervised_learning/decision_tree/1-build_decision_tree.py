@@ -20,7 +20,6 @@ class Node:
 
     def max_depth_below(self):
         """ Implementing a max depth algorithm using DFS iterative """
-
         stack = [(self, self.depth)]
         max_depth = -float('inf')
 
@@ -39,6 +38,32 @@ class Node:
 
         return max_depth
 
+    def count_nodes_below(self, only_leaves=False):
+        """ Count the number of nodes below this node """
+        stack = [(self, self.is_leaf)]
+        node = 0
+        leaf = 0
+
+        while stack:
+            node, is_leaf = stack.pop()
+
+            if is_leaf:
+                leaf += 1
+                node += 1
+            else:
+                node += 1
+
+            if node.left_child:
+                stack.append(
+                    (node.left_child, node.left_child.is_leaf)
+                )
+            if node.right_child:
+                stack.append(
+                    (node.right_child, node.right_child.is_leaf)
+                )
+
+        return leaf if only_leaves else node
+
 
 class Leaf(Node):
     """ Leaf class representing a decision outcome in the tree """
@@ -52,6 +77,10 @@ class Leaf(Node):
     def max_depth_below(self):
         """ Return the depth of the leaf """
         return self.depth
+
+    def count_nodes_below(self, only_leaves=False):
+        """ Return the count of nodes below the leaf """
+        return 1
 
 
 class Decision_Tree:
@@ -75,3 +104,7 @@ class Decision_Tree:
     def depth(self):
         """ Return the maximum depth of the tree """
         return self.root.max_depth_below()
+
+    def count_nodes(self, only_leaves=False):
+        """ Count the number of nodes in the tree """
+        return self.root.count_nodes_below(only_leaves=only_leaves)
