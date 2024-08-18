@@ -156,6 +156,7 @@ class Node:
             np.array([is_large_enough(x), is_small_enough(x)]), axis=0)
 
     def pred(self, x):
+        """ Predict the value for a given input x """
         if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
         else:
@@ -192,6 +193,7 @@ class Leaf(Node):
         pass
 
     def pred(self, x):
+        """ Predict the value for a given input x """
         return self.value
 
 
@@ -234,12 +236,14 @@ class Decision_Tree:
         self.root.update_bounds_below()
 
     def update_predict(self):
+        """ Update the prediction function for the tree """
         self.update_bounds()
         leaves = self.get_leaves()
         for leaf in leaves:
             leaf.update_indicator()
         self.predict = lambda A: sum(leaf.indicator(A)*leaf.value
-                                    for leaf in leaves)
+                                     for leaf in leaves)
 
-    def pred(self,x) :
-            return self.root.pred(x)
+    def pred(self, x):
+        """ Predict the value for a given input x """
+        return self.root.pred(x)
