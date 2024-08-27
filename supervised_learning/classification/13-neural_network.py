@@ -87,18 +87,20 @@ class NeuralNetwork:
         """ gradient descent of a neural network """
         m = Y.shape[1]
 
-        # Calculate the error for the output layer
-        dZ2 = A2 - Y
-        dW2 = np.dot(dZ2, A1.T) / m
-        db2 = np.sum(dZ2, axis=1, keepdims=True) / m
+        # output layer first
+        outError = A2 - Y
 
-        # Calculate the error for the hidden layer
-        dZ1 = np.dot(self.__W2.T, dZ2) * A1 * (1 - A1)
-        dW1 = np.dot(dZ1, X.T) / m
-        db1 = np.sum(dZ1, axis=1, keepdims=True) / m
+        outGradient = np.dot(outError, A1.T) / m
+        print(outGradient.shape)
+        outBias = np.sum(outError, axis=1, keepdims=True) / m
 
-        # Update the weights and biases
-        self.__W2 -= alpha * dW2
-        self.__b2 -= alpha * db2
-        self.__W1 -= alpha * dW1
-        self.__b1 -= alpha * db1
+        # hidden layers second
+        hidError = np.dot(self.__W2.T, outError) * A1 * (1 - A1)
+        hidGradient = np.dot(hidError, X.T) / m
+        hidBias = np.sum(hidError, axis=1, keepdims=True) / m
+
+        # Calculate weights and biases
+        self.__W1 -= alpha * hidGradient
+        self.__W2 -= alpha * outGradient
+        self.__b1 -= alpha * hidBias
+        self.__b2 -= alpha * outBias
