@@ -32,10 +32,6 @@ class Neuron:
     def A(self):
         return self.__A
 
-    @A.setter
-    def A(self, A):
-        self.__A = A
-
     @staticmethod
     def sigmoid(x):
         return 1 / (1 + np.exp(-x))
