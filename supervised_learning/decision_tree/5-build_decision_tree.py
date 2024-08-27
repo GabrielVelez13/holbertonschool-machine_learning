@@ -145,7 +145,7 @@ class Node:
         def is_large_enough(x):
             lower = np.array([self.lower.get(i, -np.inf)
                               for i in range(x.shape[1])])
-            return np.all(x >= lower, axis=1)
+            return np.all(x > lower, axis=1)
 
         def is_small_enough(x):
             upper = np.array([self.upper.get(i, np.inf)
@@ -154,6 +154,12 @@ class Node:
 
         self.indicator = lambda x: np.all(
             np.array([is_large_enough(x), is_small_enough(x)]), axis=0)
+
+    def pred(self, x):
+        if x[self.feature] > self.threshold:
+            return self.left_child.pred(x)
+        else:
+            return self.right_child.pred(x)
 
 
 class Leaf(Node):
@@ -184,6 +190,9 @@ class Leaf(Node):
     def update_bounds_below(self):
         """ pass because there is nothing below """
         pass
+
+    def pred(self, x):
+        return self.value
 
 
 class Decision_Tree:
@@ -223,3 +232,13 @@ class Decision_Tree:
     def update_bounds(self):
         """ Updates the upper and lower bounds """
         self.root.update_bounds_below()
+
+    def update_predict(self):
+        self.update_bounds()
+        leaves = self.get_leaves()
+        for leaf in leaves:
+            leaf.update_indicator()
+        self.predict = lambda A:  # <--- To be filled
+
+    def pred(self,x) :
+            return self.root.pred(x)
