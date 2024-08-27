@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ The start of a neuron """
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Neuron:
@@ -93,8 +94,8 @@ class Neuron:
                     print(f"Cost after {i} iterations: {cost}")
 
         if graph:
-            costs.append((self.cost(Y, self.__A), iterations))
-            y_values, x_values = zip(*costs)
+            costs.append((iterations, self.cost(Y, self.__A)))
+            x_values, y_values = zip(*costs)
             plt.plot(x_values, y_values, 'b-')
             plt.xlabel('iteration')
             plt.ylabel('cost')
