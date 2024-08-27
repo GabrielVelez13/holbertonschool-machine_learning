@@ -5,3 +5,4 @@
 
 # Ignore virtual environment directories
 .venv/
+.idea/
