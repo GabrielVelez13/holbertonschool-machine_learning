@@ -90,13 +90,12 @@ class NeuralNetwork:
         # output layer first
         outError = A2 - Y
 
-        outGradient = np.dot(outError, A1.T) / m
-        print(outGradient.shape)
+        outGradient = np.dot(A1, outError.T) / m
         outBias = np.sum(outError, axis=1, keepdims=True) / m
 
         # hidden layers second
         hidError = np.dot(self.__W2.T, outError) * A1 * (1 - A1)
-        hidGradient = np.dot(hidError, X.T) / m
+        hidGradient = np.dot(X, hidError.T) / m
         hidBias = np.sum(hidError, axis=1, keepdims=True) / m
 
         # Calculate weights and biases
