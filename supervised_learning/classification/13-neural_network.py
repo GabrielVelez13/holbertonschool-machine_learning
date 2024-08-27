@@ -87,20 +87,31 @@ class NeuralNetwork:
         """ gradient descent of a neural network """
         m = Y.shape[1]
 
-        # output layer first
-        outError = A2 - Y
+        # Calculate the error for the output layer
+        dZ2 = A2 - Y
+        dW2 = np.dot(dZ2, A1.T) / m
+        db2 = np.sum(dZ2, axis=1, keepdims=True) / m
 
-        outGradient = np.dot(outError, A1.T) / m
-        print(outGradient.shape)
-        outBias = np.sum(outError, axis=1, keepdims=True) / m
+        # Calculate the error for the hidden layer
+        dZ1 = np.dot(self.__W2.T, dZ2) * A1 * (1 - A1)
+        dW1 = np.dot(dZ1, X.T) / m
+        db1 = np.sum(dZ1, axis=1, keepdims=True) / m
 
-        # hidden layers second
-        hidError = np.dot(self.__W2.T, outError) * A1 * (1 - A1)
-        hidGradient = np.dot(hidError, X.T) / m
-        hidBias = np.sum(hidError, axis=1, keepdims=True) / m
+        # Update the weights and biases
+        self.__W2 -= alpha * dW2
+        self.__b2 -= alpha * db2
+        self.__W1 -= alpha * dW1
+        self.__b1 -= alpha * db1
 
-        # Calculate weights and biases
-        self.__W1 -= alpha * hidGradient
-        self.__W2 -= alpha * outGradient
-        self.__b1 -= alpha * hidBias
-        self.__b2 -= alpha * outBias
+lib_train = np.load('data/Binary_Train.npz')
+X_3D, Y = lib_train['X'], lib_train['Y']
+X = X_3D.reshape((X_3D.shape[0], -1)).T
+
+np.random.seed(0)
+nn = NeuralNetwork(X.shape[0], 3)
+A1, A2 = nn.forward_prop(X)
+nn.gradient_descent(X, Y, A1, A2, 0.5)
+print(nn.W1)
+print(nn.b1)
+print(nn.W2)
+print(nn.b2)
