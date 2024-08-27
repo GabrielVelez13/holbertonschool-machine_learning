@@ -17,7 +17,7 @@ class DeepNeuralNetwork:
         if not isinstance(layers, list) or not layers:
             raise TypeError('layers must be a list of positive '
                             'integers')
-        if not all(n >= 1 for n in layers):
+        if not filter(lambda n: n >= 1, layers):
             raise TypeError('layers must be a list of positive '
                             'integers')
 
