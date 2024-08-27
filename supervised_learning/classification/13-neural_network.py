@@ -99,7 +99,7 @@ class NeuralNetwork:
         hidBias = np.sum(hidError, axis=1, keepdims=True) / m
 
         # Calculate weights and biases
-        self.__W1 -= alpha * hidGradient
-        self.__W2 -= alpha * outGradient
+        self.__W1 -= alpha * hidGradient.T
+        self.__W2 -= alpha * outGradient.T
         self.__b1 -= alpha * hidBias
         self.__b2 -= alpha * outBias
