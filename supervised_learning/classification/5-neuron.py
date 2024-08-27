@@ -67,7 +67,7 @@ class Neuron:
     def gradient_descent(self, X, Y, A, alpha=0.05):
         m = Y.shape[1]
         error = A - Y
-        weightGradient = np.dot(X, error.T) / m
+        weightGradient = np.matmul(X, error.T) / m
 
         biasGradient = np.sum(error) / m
 
