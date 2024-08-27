@@ -71,5 +71,5 @@ class Neuron:
 
         biasGradient = np.sum(error) / m
 
-        self.__W -= alpha * weightGradient.T
+        self.__W -= (alpha * weightGradient).T
         self.__b -= alpha * biasGradient

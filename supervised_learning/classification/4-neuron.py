@@ -52,7 +52,6 @@ class Neuron:
                                                         A)) / m
 
     def evaluate(self, X, Y):
-        check = lambda x: 1 if x >= 0.5 else 0
         A = self.forward_prop(X)
         cost = self.cost(Y, self.__A)
         return np.where(A >= .5, 1, 0), cost
