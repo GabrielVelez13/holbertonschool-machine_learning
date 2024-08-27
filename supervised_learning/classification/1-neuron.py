@@ -5,11 +5,9 @@ import numpy as np
 
 class Neuron:
     """ A Neuron class where it all happens """
+
     def __init__(self, nx):
-        """
-        Initializing checking the validity of nx
-        and creating the weight vector, bias, and activation
-        """
+        """ Init the neuron with weights, bias, and activation """
         if not isinstance(nx, int):
             raise TypeError('nx must be a integer')
         if nx < 1:
@@ -21,12 +19,15 @@ class Neuron:
 
     @property
     def W(self):
+        """ Return the weights """
         return self.__W
 
     @property
     def b(self):
+        """ Return the bias """
         return self.__b
 
     @property
     def A(self):
+        """ Return the activation """
         return self.__A
