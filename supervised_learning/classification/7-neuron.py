@@ -73,17 +73,23 @@ class Neuron:
             raise TypeError('alpha must be a float')
         if alpha < 0:
             raise ValueError('alpha must be positive')
+        if not isinstance(step, int):
+            raise TypeError('step must be an integer')
+        if step <= 0 or step > iterations:
+            raise ValueError('step must be a positive integer and <= '
+                             'iterations')
+
 
         costs = []
 
-        for i in range(iterations):
+        for i in range(iterations + 1):
             self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha)
-            cost = self.cost(Y, self.__A)
-            costs.append((cost, i))
-
-            if verbose:
-                print(f"Cost after {i} iterations: {cost}")
+            if i % step  == 0 or i == iterations or i == 0:
+                cost = self.cost(Y, self.__A)
+                costs.append((i, cost))
+                if verbose:
+                    print(f"Cost after {i} iterations: {cost}")
 
         if graph:
             costs.append((self.cost(Y, self.__A), iterations))
@@ -95,3 +101,29 @@ class Neuron:
             plt.show()
 
         return self.evaluate(X, Y)
+
+lib_train = np.load('data/Binary_Train.npz')
+X_train_3D, Y_train = lib_train['X'], lib_train['Y']
+X_train = X_train_3D.reshape((X_train_3D.shape[0], -1)).T
+lib_dev = np.load('data/Binary_Dev.npz')
+X_dev_3D, Y_dev = lib_dev['X'], lib_dev['Y']
+X_dev = X_dev_3D.reshape((X_dev_3D.shape[0], -1)).T
+
+np.random.seed(0)
+neuron = Neuron(X_train.shape[0])
+A, cost = neuron.train(X_train, Y_train, iterations=3000)
+accuracy = np.sum(A == Y_train) / Y_train.shape[1] * 100
+print("Train cost:", cost)
+print("Train accuracy: {}%".format(accuracy))
+A, cost = neuron.evaluate(X_dev, Y_dev)
+accuracy = np.sum(A == Y_dev) / Y_dev.shape[1] * 100
+print("Dev cost:", cost)
+print("Dev accuracy: {}%".format(accuracy))
+fig = plt.figure(figsize=(10, 10))
+for i in range(100):
+    fig.add_subplot(10, 10, i + 1)
+    plt.imshow(X_dev_3D[i])
+    plt.title(A[0, i])
+    plt.axis('off')
+plt.tight_layout()
+plt.show()
