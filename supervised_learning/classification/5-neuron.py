@@ -32,18 +32,6 @@ class Neuron:
     def A(self):
         return self.__A
 
-    @A.setter
-    def A(self, A):
-        self.__A = A
-
-    @W.setter
-    def W(self, W):
-        self.__W = W
-
-    @b.setter
-    def b(self, b):
-        self.__b = b
-
     @staticmethod
     def sigmoid(x):
         return 1 / (1 + np.exp(-x))
@@ -67,9 +55,9 @@ class Neuron:
     def gradient_descent(self, X, Y, A, alpha=0.05):
         m = Y.shape[1]
         error = A - Y
-        weightGradient = np.matmul(X, error.T) / m
+        weightGradient = np.dot(X, error.T) / m
 
         biasGradient = np.sum(error) / m
 
-        self.__W = self.__W -  (alpha * weightGradient).T
-        self.__b = self.__b - alpha * biasGradient
+        self.__W -= (alpha * weightGradient).T
+        self.__b -= alpha * biasGradient
