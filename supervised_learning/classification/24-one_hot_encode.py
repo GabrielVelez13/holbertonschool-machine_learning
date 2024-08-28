@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""  """
+""" hot ones """
 import numpy as np
 
 
