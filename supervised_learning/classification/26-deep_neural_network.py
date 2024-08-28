@@ -109,7 +109,7 @@ class DeepNeuralNetwork:
             raise ValueError('alpha must be positive')
         if not isinstance(step, int):
             raise TypeError('step must be an integer')
-        if step <= 0 or step >= iterations:
+        if (step <= 0 or step >= iterations) and verbose:
             raise ValueError('step must be a positive integer and '
                              '<= iterations')
 
