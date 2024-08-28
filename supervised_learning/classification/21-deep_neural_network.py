@@ -81,7 +81,7 @@ class DeepNeuralNetwork:
         """ Calculates the gradient descent """
         m = Y.shape[1]
         for i in reversed(range(1, self.L + 1)):
-            A = self.cache[f'A{i}']
+            A = cache[f'A{i}']
             if i == self.L:
                 de = A - Y
             else:
