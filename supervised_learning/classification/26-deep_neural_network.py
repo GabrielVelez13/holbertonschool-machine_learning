@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Starting deep neural networks """
 import numpy as np
-import matplotlib.pyplot as plt
 import pickle
 
 
