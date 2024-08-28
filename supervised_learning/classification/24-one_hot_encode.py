@@ -8,6 +8,13 @@ def one_hot_encode(Y, classes):
     creating a metrix where the activated value of each column
     is given by a class list
     """
-    z = np.zeros((Y.shape[0], classes ))
-    z[Y, np.arange(classes)] = 1
-    return z
+    if (not isinstance(Y, np.ndarray) or not isinstance(classes, int)
+            or classes <= 0):
+        return None
+
+    try:
+        one_hot = np.zeros((classes, Y.shape[0]))
+        one_hot[Y, np.arange(Y.shape[0])] = 1
+        return one_hot
+    except Exception:
+        return None
