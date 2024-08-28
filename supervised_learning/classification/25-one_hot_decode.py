@@ -18,4 +18,3 @@ def one_hot_decode(one_hot):
         return z
     except Exception:
         return None
-
