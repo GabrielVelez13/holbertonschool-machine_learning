@@ -58,10 +58,14 @@ class DeepNeuralNetwork:
 
     def forward_prop(self, X):
         """ Forward propagating the deep network """
+
         self.__cache['A0'] = X
         for i in range(self.L):
-            z = np.dot(self.weights[f'W{i + 1}'],
-                       self.cache[f'A{i}']) + self.weights[f'b{i + 1}']
+            W = self.weights[f'W{i + 1}']
+            b = self.weights[f'b{i + 1}']
+            A_prev = self.cache[f'A{i}']
+
+            z = np.dot(W, A_prev) + b
             self.__cache[f'A{i + 1}'] = self.sigmoid(z)
         return self.__cache[f'A{self.L}'], self.__cache
 
@@ -89,3 +93,20 @@ class DeepNeuralNetwork:
             dZ = dZ_step1 * (A_prev * (1 - A_prev))
             self.__weights[f'W{i}'] -= alpha * dW
             self.__weights[f'b{i}'] -= alpha * db
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """ Trains the model and returns an evaluation """
+        if not isinstance(iterations, int):
+            raise TypeError('iterations must be an integer')
+        if iterations <= 0:
+            raise ValueError('iterations must be a positive integer')
+        if not isinstance(alpha, float):
+            raise TypeError('alpha must be a float')
+        if alpha <= 0:
+            raise ValueError('alpha must be positive')
+
+        for _ in range(iterations):
+            cache = self.forward_prop(X)[1]
+            self.gradient_descent(Y, cache, alpha)
+
+        return self.evaluate(X, Y)
