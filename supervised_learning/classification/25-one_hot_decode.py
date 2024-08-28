@@ -15,7 +15,7 @@ def one_hot_decode(one_hot):
 
     try:
         z = np.argmax(one_hot, axis=0)
-        return z.to_list()
+        return z
     except Exception:
         return None
 
