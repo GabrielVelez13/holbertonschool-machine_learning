@@ -97,7 +97,7 @@ class DeepNeuralNetwork:
             self.__weights[f'b{i}'] -= alpha * db
 
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
-            graph=True, step=100):
+              graph=True, step=100):
         """ Train the neuron """
         if not isinstance(iterations, int):
             raise TypeError('iterations must be an integer')
@@ -126,7 +126,7 @@ class DeepNeuralNetwork:
 
         if graph:
             costs.append(((self.cost(Y, self.cache[f'A{self.L}'])),
-            iterations))
+                         iterations))
             y_values, x_values = zip(*costs)
             plt.plot(x_values, y_values, 'b-')
             plt.xlabel('iteration')
