@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Starting deep neural networks """
 import numpy as np
+import matplotlib.pyplot as plt
 import pickle
 
 
@@ -14,12 +15,12 @@ class DeepNeuralNetwork:
         """
         if not isinstance(nx, int):
             raise TypeError('nx must be an integer')
-        if nx < 1:
+        if nx <= 0:
             raise ValueError('nx must be a positive integer')
         if not isinstance(layers, list) or not layers:
             raise TypeError('layers must be a list of positive '
                             'integers')
-        if layers[-1] < 1:
+        if layers[-1] <= 0:
             raise TypeError('layers must be a list of positive '
                             'integers')
 
@@ -100,15 +101,15 @@ class DeepNeuralNetwork:
         """ Train the neuron """
         if not isinstance(iterations, int):
             raise TypeError('iterations must be an integer')
-        if iterations < 1:
+        if iterations <= 0:
             raise ValueError('iterations must be a positive integer')
         if not isinstance(alpha, float):
             raise TypeError('alpha must be a float')
-        if alpha < 1:
+        if alpha <= 0:
             raise ValueError('alpha must be positive')
         if not isinstance(step, int):
             raise TypeError('step must be an integer')
-        if step < 1 or step > iterations:
+        if step <= 0 or step > iterations:
             raise ValueError('step must be a positive integer and '
                              '<= iterations')
 
