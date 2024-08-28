@@ -50,9 +50,11 @@ class DeepNeuralNetwork:
         """ Getter function """
         return self.__weights
 
-    def sigmoid(self, X):
+    @staticmethod
+    def sigmoid(X):
         """ Returns the sigmoid function """
         return 1 / (1 + np.exp(-X))
+
     def forward_prop(self, X):
         """ Forward propagating the deep network """
         self.__cache['A0'] = X
