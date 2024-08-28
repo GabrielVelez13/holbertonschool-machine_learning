@@ -82,7 +82,8 @@ class DeepNeuralNetwork:
         m = Y.shape[1]
         dZ = cache[f'A{self.L}'] - Y
         for i in range(self.L, 0, -1):
-            A_prev = cache[f'A{i - 1}']
+            if i == self.L:
+                A_prev = cache[f'A{i - 1}']
             dW = np.dot(dZ, A_prev.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
             dZ_step1 = np.dot(self.weights[f'W{i}'].T, dZ)
