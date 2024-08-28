@@ -10,10 +10,12 @@ def one_hot_decode(one_hot):
     """
     if not isinstance(one_hot, np.ndarray):
         return None
+    if len(one_hot.shape) != 2:
+        return None
 
     try:
         z = np.argmax(one_hot, axis=0)
         return z.to_list()
-    except Exception:
+    except Exception(ValueError):
         return None
 
