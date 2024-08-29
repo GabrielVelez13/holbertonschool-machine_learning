@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" This module defines a deep neural network class for binary classification"""
+""" This module defines a deep neural network class for binary
+classification"""
 from matplotlib import pyplot as plt
 import numpy as np
 import os
@@ -7,7 +8,8 @@ import pickle
 
 
 class DeepNeuralNetwork:
-    """ This class defines a deep neural network performing binary classification """
+    """ This class defines a deep neural network performing binary
+    classification """
 
     def __init__(self, nx, layers):
         """ Initialize the deep neural network """
@@ -16,18 +18,24 @@ class DeepNeuralNetwork:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
         if not isinstance(layers, list) or not layers:
-            raise TypeError("layers must be a list of positive integers")
+            raise TypeError("layers must be a list of positive "
+                            "integers")
         if not all(isinstance(x, int) and x > 0 for x in layers):
-            raise TypeError("layers must be a list of positive integers")
+            raise TypeError("layers must be a list of positive "
+                            "integers")
 
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
         for i in range(self.L):
             if i == 0:
-                self.weights['W' + str(i + 1)] = np.random.randn(layers[i], nx) * np.sqrt(2 / nx)
+                self.weights['W' + str(i + 1)] = (
+                        np.random.randn(layers[i], nx) *
+                        np.sqrt(2 / nx))
             else:
-                self.weights['W' + str(i + 1)] = np.random.randn(layers[i], layers[i - 1]) * np.sqrt(2 / layers[i - 1])
+                self.weights['W' + str(i + 1)] = (
+                        np.random.randn(layers[i], layers[i - 1]) *
+                        np.sqrt(2 / layers[i - 1]))
             self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
 
     @property
@@ -78,11 +86,13 @@ class DeepNeuralNetwork:
             A_prev = cache['A' + str(i - 1)]
             dW = np.dot(dZ, A_prev.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
-            dZ = np.dot(self.weights['W' + str(i)].T, dZ) * (A_prev * (1 - A_prev))
+            dZ = (np.dot(self.weights['W' + str(i)].T, dZ) *
+                  (A_prev * (1 - A_prev)))
             self.weights['W' + str(i)] -= alpha * dW
             self.weights['b' + str(i)] -= alpha * db
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
         """ Train the deep neural network """
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
@@ -96,7 +106,8 @@ class DeepNeuralNetwork:
             if not isinstance(step, int):
                 raise TypeError("step must be an integer")
             if step <= 0 or step > iterations:
-                raise ValueError("step must be positive and <= iterations")
+                raise ValueError("step must be positive and <= "
+                                 "iterations")
 
         costs = []
         for i in range(iterations + 1):
