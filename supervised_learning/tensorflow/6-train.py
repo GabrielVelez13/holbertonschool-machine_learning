@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+""" Training and saving a model """
 import tensorflow.compat.v1 as tf
 
 calculate_accuracy = __import__(
@@ -11,6 +13,7 @@ forward_prop = __import__('2-forward_prop').forward_prop
 
 def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
           alpha, iterations, save_path="/tmp/model.ckpt"):
+    """ training a model """
     x, y = create_placeholders(X_train.shape[1], Y_train.shape[1])
     y_pred = forward_prop(x, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
